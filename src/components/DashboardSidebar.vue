@@ -88,7 +88,7 @@
 </template>
 
 <script setup lang="js">
-import { ref, computed } from "vue";
+import { computed } from "vue";
 
 defineProps({
   isOpen: Boolean,

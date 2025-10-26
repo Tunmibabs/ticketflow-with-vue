@@ -1,33 +1,47 @@
 <template>
-  <div class="min-h-screen bg-[var(--background)] text-[var(--foreground)] flex flex-col">
+  <div
+    class="min-h-screen bg-[var(--background)] text-[var(--foreground)] flex flex-col"
+  >
     <div class="flex-1 flex items-center justify-center px-6 py-12">
       <div class="w-full max-w-md">
         <div class="text-center mb-8">
-          <h1 class="text-3xl font-bold text-[var(--primary)] mb-2">TicketFlow</h1>
+          <h1 class="text-3xl font-bold text-[var(--primary)] mb-2">
+            TicketFlow
+          </h1>
           <p class="text-[var(--muted-foreground)]">Sign in to your account</p>
         </div>
 
         <form @submit.prevent="handleLogin" class="space-y-4">
           <div>
-            <label class="block text-sm font-medium text-[var(--foreground)] mb-2">Email</label>
+            <label
+              class="block text-sm font-medium text-[var(--foreground)] mb-2"
+              >Email</label
+            >
             <input
               v-model="email"
               type="email"
               class="w-full px-4 py-2 bg-[var(--card)] text-[var(--foreground)] rounded-lg border border-[var(--border)] focus:border-[var(--primary)] focus:outline-none"
               placeholder="you@example.com"
             />
-            <p v-if="errors.email" class="text-red-500 text-sm mt-1">{{ errors.email }}</p>
+            <p v-if="errors.email" class="text-red-500 text-sm mt-1">
+              {{ errors.email }}
+            </p>
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-[var(--foreground)] mb-2">Password</label>
+            <label
+              class="block text-sm font-medium text-[var(--foreground)] mb-2"
+              >Password</label
+            >
             <input
               v-model="password"
               type="password"
               class="w-full px-4 py-2 bg-[var(--card)] text-[var(--foreground)] rounded-lg border border-[var(--border)] focus:border-[var(--primary)] focus:outline-none"
               placeholder="••••••••"
             />
-            <p v-if="errors.password" class="text-red-500 text-sm mt-1">{{ errors.password }}</p>
+            <p v-if="errors.password" class="text-red-500 text-sm mt-1">
+              {{ errors.password }}
+            </p>
           </div>
 
           <button
@@ -35,18 +49,22 @@
             :disabled="isLoading"
             class="w-full px-4 py-2 bg-[var(--primary)] text-[var(--primary-foreground)] rounded-lg font-semibold hover:opacity-90 transition-opacity disabled:opacity-50"
           >
-            {{ isLoading ? 'Signing in...' : 'Sign In' }}
+            {{ isLoading ? "Signing in..." : "Sign In" }}
           </button>
         </form>
 
         <p class="text-center text-[var(--muted-foreground)] mt-6">
           Don't have an account?
-          <router-link to="/signup" class="text-[var(--primary)] hover:underline">Sign up</router-link>
+          <router-link
+            to="/signup"
+            class="text-[var(--primary)] hover:underline"
+            >Sign up</router-link
+          >
         </p>
       </div>
     </div>
 
-    <Footer />
+    <AppFooter />
   </div>
 </template>
 
@@ -56,7 +74,7 @@ import { useRouter } from 'vue-router'
 import { useToast } from '../composables/useToast'
 import { useErrorHandler } from '../composables/useErrorHandler'
 import { ERROR_MESSAGES } from '../utils/errorMessages'
-import Footer from '../components/Footer.vue'
+import AppFooter from '../components/AppFooter.vue'
 
 const router = useRouter()
 const { addToast } = useToast()

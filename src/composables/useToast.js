@@ -1,9 +1,9 @@
-import { inject, ref, Ref } from "vue";
+import { inject, ref } from "vue";
 
 const ToastSymbol = Symbol("Toast");
 
 export function useToast() {
-  const context = inject < ToastContextType > ToastSymbol;
+  const context = ToastSymbol;
   if (!context) {
     throw new Error("useToast must be used within ToastProvider");
   }

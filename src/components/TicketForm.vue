@@ -64,7 +64,7 @@ const props = defineProps({
 
 const emit = defineEmits(['submit', 'cancel'])
 
-const formData = ref<Ticket>({
+const formData = ({
   title: '',
   description: '',
   status: 'open'
