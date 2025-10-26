@@ -1,12 +1,11 @@
-@import "tailwindcss";
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@theme inline {
+/* @theme inline {
   --font-sans: "Geist", "Geist Fallback";
   --font-mono: "Geist Mono", "Geist Mono Fallback";
-}
+} */
 
 :root {
   --background: #0f172a;
@@ -28,7 +27,7 @@
 }
 
 * {
-  @apply border-[var(--border)] outline-[var(--primary)]/50;
+  @apply border-[var(--border)] ring-1 ring-[var(--primary)] ring-opacity-50;
 }
 
 body {

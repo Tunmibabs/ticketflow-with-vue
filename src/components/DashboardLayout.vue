@@ -36,7 +36,6 @@
         </div>
       </div>
     </div>
-    <AppFooter />
   </div>
 </template>
 
@@ -44,8 +43,6 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import DashboardSidebar from './DashboardSidebar.vue'
-import Footer from './AppFooter.vue'
-import AppFooter from './AppFooter.vue'
 
 const router = useRouter()
 const isSidebarOpen = ref(true)

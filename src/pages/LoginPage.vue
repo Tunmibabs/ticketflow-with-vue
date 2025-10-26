@@ -63,8 +63,6 @@
         </p>
       </div>
     </div>
-
-    <AppFooter />
   </div>
 </template>
 
@@ -74,7 +72,6 @@ import { useRouter } from 'vue-router'
 import { useToast } from '../composables/useToast'
 import { useErrorHandler } from '../composables/useErrorHandler'
 import { ERROR_MESSAGES } from '../utils/errorMessages'
-import AppFooter from '../components/AppFooter.vue'
 
 const router = useRouter()
 const { addToast } = useToast()

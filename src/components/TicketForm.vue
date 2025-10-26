@@ -59,12 +59,15 @@ import { ref, watch } from 'vue'
 import { ERROR_MESSAGES } from '../utils/errorMessages'
 
 const props = defineProps({
-  initialData
+  initialData: {
+    type: Object,
+    default: null
+  }
 })
 
 const emit = defineEmits(['submit', 'cancel'])
 
-const formData = ({
+const formData = ref({
   title: '',
   description: '',
   status: 'open'
