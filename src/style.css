@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@theme inline {
-  --font-sans: "Geist", "Geist Fallback";
-  --font-mono: "Geist Mono", "Geist Mono Fallback";
-}
-
 :root {
   --background: #0f172a;
   --foreground: #f1f5f9;
@@ -27,7 +22,7 @@
 }
 
 body {
-  @apply bg-[var(--background)] text-[var(--foreground)];
+  @apply bg-[var(--background)] text-[var(--foreground)] font-sans;
 }
 
 @layer utilities {

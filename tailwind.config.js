@@ -1,13 +1,14 @@
 /** @type {import('tailwindcss').Config} */
+const { fontFamily } = require("tailwindcss/defaultTheme");
 module.exports = {
-  // Add/Ensure this content array exists and is correct
-  content: [
-    "./public/**/*.html",
-    "./src/**/*.{vue,js,ts,jsx,tsx}",
-  ],
+  content: ["./public/**/*.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ["Geist", ...fontFamily.sans],
+        mono: ["Geist Mono", ...fontFamily.mono],
+      },
+    },
   },
   plugins: [],
 };
-
