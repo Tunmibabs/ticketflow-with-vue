@@ -2,29 +2,39 @@
   <div class="p-6 rounded-lg bg-[var(--card)] border border-[var(--border)]">
     <form @submit.prevent="handleSubmit" class="space-y-4">
       <div>
-        <label class="block text-sm font-medium text-[var(--foreground)] mb-2">Title</label>
+        <label class="block text-sm font-medium text-[var(--foreground)] mb-2"
+          >Title</label
+        >
         <input
           v-model="formData.title"
           type="text"
           class="w-full px-4 py-2 bg-slate-800 text-slate-100 rounded-lg border border-slate-700 focus:border-blue-500 focus:outline-none"
           placeholder="Ticket title"
         />
-        <p v-if="errors.title" class="text-red-500 text-sm mt-1">{{ errors.title }}</p>
+        <p v-if="errors.title" class="text-red-500 text-sm mt-1">
+          {{ errors.title }}
+        </p>
       </div>
 
       <div>
-        <label class="block text-sm font-medium text-[var(--foreground)] mb-2">Description</label>
+        <label class="block text-sm font-medium text-[var(--foreground)] mb-2"
+          >Description</label
+        >
         <textarea
           v-model="formData.description"
           class="w-full px-4 py-2 bg-slate-800 text-slate-100 rounded-lg border border-slate-700 focus:border-blue-500 focus:outline-none"
           placeholder="Ticket description"
           rows="4"
         />
-        <p v-if="errors.description" class="text-red-500 text-sm mt-1">{{ errors.description }}</p>
+        <p v-if="errors.description" class="text-red-500 text-sm mt-1">
+          {{ errors.description }}
+        </p>
       </div>
 
       <div>
-        <label class="block text-sm font-medium text-[var(--foreground)] mb-2">Status</label>
+        <label class="block text-sm font-medium text-[var(--foreground)] mb-2"
+          >Status</label
+        >
         <select
           v-model="formData.status"
           class="w-full px-4 py-2 bg-slate-800 text-slate-100 rounded-lg border border-slate-700 focus:border-blue-500 focus:outline-none"
@@ -40,7 +50,7 @@
           type="submit"
           class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
         >
-          {{ initialData ? 'Update' : 'Create' }}
+          {{ initialData ? "Update" : "Create" }}
         </button>
         <button
           type="button"
@@ -105,6 +115,7 @@ const validateForm = () => {
 }
 
 const handleSubmit = () => {
+  console.log("Submit clicked") 
   if (!validateForm()) return
   emit('submit', formData.value)
 }

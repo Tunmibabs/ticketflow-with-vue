@@ -15,8 +15,8 @@ export function useErrorHandler() {
   };
 
   const handleSessionExpired = () => {
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("currentUser");
+    // localStorage.removeItem("authToken");
+    // localStorage.removeItem("currentUser");
     addToast(ERROR_MESSAGES.AUTH_SESSION_EXPIRED, "error");
     router.push("/login");
   };

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="p-6 rounded-lg bg-[var(--card)] border border-[var(--border)] hover:border-[var(--primary)] transition-colors"
+    class="p-6 rounded-lg bg-[var(--card)] border border-[var(--border)] transition-colors"
   >
     <div class="flex items-center justify-between">
       <div>

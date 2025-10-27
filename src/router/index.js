@@ -1,11 +1,11 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import LandingPage from "../pages/LandingPage.vue";
 import LoginPage from "../pages/LoginPage.vue";
-import SignupPage from "../pages/SignupPage.vue";
 import DashboardPage from "../pages/DashboardPage.vue";
 import TicketsPage from "../pages/TicketsPage.vue";
 import AnalyticsPage from "../pages/AnalyticsPage.vue";
 import SettingsPage from "../pages/SettingsPage.vue";
+import SignupPage from "../pages/SignupPage.vue";
 
 const routes = [
   {

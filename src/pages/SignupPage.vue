@@ -1,231 +1,168 @@
 <template>
-  <DashboardLayout>
-    <div class="p-8">
-      <div class="flex justify-between items-center mb-8">
-        <h1 class="text-3xl font-bold text-slate-100">Tickets</h1>
-        <button
-          @click="toggleForm"
-          class="px-6 py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors"
-        >
-          {{ showForm ? 'Cancel' : '+ New Ticket' }}
-        </button>
-      </div>
+  <div
+    class="min-h-screen bg-[var(--background)] text-[var(--foreground)] flex flex-col"
+  >
+    <div class="flex-1 flex items-center justify-center px-6 py-12">
+      <div class="w-full max-w-md">
+        <div class="text-center mb-8">
+          <h1 class="text-3xl font-bold text-[var(--primary)] mb-2">
+            TicketFlow
+          </h1>
+          <p class="text-[var(--muted-foreground)]">Create your account</p>
+        </div>
 
-      <div v-if="showForm" class="mb-8">
-        <TicketForm
-          :initial-data="editingTicket"
-          @submit="editingTicket ? handleUpdateTicket : handleAddTicket"
-          @cancel="cancelForm"
-        />
-      </div>
+        <form @submit.prevent="handleSignup" class="space-y-4">
+          <div>
+            <label
+              class="block text-sm font-medium text-[var(--foreground)] mb-2"
+              >Email</label
+            >
+            <input
+              v-model="email"
+              type="email"
+              class="w-full px-4 py-2 bg-[var(--card)] text-[var(--foreground)] rounded-lg border border-[var(--border)] focus:border-[var(--primary)] focus:outline-none"
+              placeholder="you@example.com"
+            />
+            <p v-if="errors.email" class="text-red-500 text-sm mt-1">
+              {{ errors.email }}
+            </p>
+          </div>
 
-      <div class="mb-6">
-        <input
-          v-model="searchTerm"
-          type="text"
-          placeholder="Search tickets..."
-          class="w-full px-4 py-2 bg-slate-800 text-slate-100 rounded-lg border border-slate-700 focus:border-blue-500 focus:outline-none"
-        />
-      </div>
+          <div>
+            <label
+              class="block text-sm font-medium text-[var(--foreground)] mb-2"
+              >Password</label
+            >
+            <input
+              v-model="password"
+              type="password"
+              class="w-full px-4 py-2 bg-[var(--card)] text-[var(--foreground)] rounded-lg border border-[var(--border)] focus:border-[var(--primary)] focus:outline-none"
+              placeholder="••••••••"
+            />
+            <p v-if="errors.password" class="text-red-500 text-sm mt-1">
+              {{ errors.password }}
+            </p>
+          </div>
 
-      <div class="bg-slate-900 rounded-lg overflow-hidden">
-        <table class="w-full">
-          <thead>
-            <tr class="border-b border-slate-700 bg-slate-800">
-              <th class="px-6 py-3 text-left text-sm font-semibold text-slate-300">Title</th>
-              <th class="px-6 py-3 text-left text-sm font-semibold text-slate-300">Description</th>
-              <th class="px-6 py-3 text-left text-sm font-semibold text-slate-300">Status</th>
-              <th class="px-6 py-3 text-left text-sm font-semibold text-slate-300">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="ticket in filteredTickets" :key="ticket.id" class="border-b border-slate-700 hover:bg-slate-800">
-              <td class="px-6 py-4 text-slate-100">{{ ticket.title }}</td>
-              <td class="px-6 py-4 text-slate-300 truncate">{{ ticket.description }}</td>
-              <td class="px-6 py-4">
-                <span :class="['px-3 py-1 rounded-full text-xs font-medium', getStatusColor(ticket.status)]">
-                  {{ ticket.status }}
-                </span>
-              </td>
-              <td class="px-6 py-4 flex gap-2">
-                <button
-                  @click="startEdit(ticket)"
-                  class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors text-sm"
-                >
-                  Edit
-                </button>
-                <button
-                  @click="openDeleteConfirm(ticket.id)"
-                  class="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition-colors text-sm"
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+          <div>
+            <label
+              class="block text-sm font-medium text-[var(--foreground)] mb-2"
+              >Confirm Password</label
+            >
+            <input
+              v-model="confirmPassword"
+              type="password"
+              class="w-full px-4 py-2 bg-[var(--card)] text-[var(--foreground)] rounded-lg border border-[var(--border)] focus:border-[var(--primary)] focus:outline-none"
+              placeholder="••••••••"
+            />
+            <p v-if="errors.confirmPassword" class="text-red-500 text-sm mt-1">
+              {{ errors.confirmPassword }}
+            </p>
+          </div>
 
-      <div v-if="filteredTickets.length === 0" class="text-center py-12">
-        <p class="text-slate-400">No tickets found</p>
-      </div>
+          <button
+            type="submit"
+            :disabled="isLoading"
+            class="w-full px-4 py-2 bg-[var(--primary)] text-[var(--primary-foreground)] rounded-lg font-semibold hover:opacity-90 transition-opacity disabled:opacity-50"
+          >
+            {{ isLoading ? "Creating account..." : "Create Account" }}
+          </button>
+        </form>
 
-      <DeleteConfirmationDialog
-        :is-open="deleteConfirm.isOpen"
-        :is-loading="isDeleting"
-        @confirm="handleConfirmDelete"
-        @cancel="closeDeleteConfirm"
-      />
+        <p class="text-center text-[var(--muted-foreground)] mt-6">
+          Already have an account?
+          <router-link to="/login" class="text-[var(--primary)] hover:underline"
+            >Sign in</router-link
+          >
+        </p>
+      </div>
     </div>
-  </DashboardLayout>
+  </div>
 </template>
 
 <script setup lang="js">
-import { ref, computed, onMounted } from 'vue'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { useToast } from '../composables/useToast'
 import { useErrorHandler } from '../composables/useErrorHandler'
-import DashboardLayout from '../components/DashboardLayout.vue'
-import TicketForm from '../components/TicketForm.vue'
-import DeleteConfirmationDialog from '../components/DeleteConfirmationDialog.vue'
+import { ERROR_MESSAGES } from '../utils/errorMessages'
 
-const tickets = ref([])
-const searchTerm = ref('')
-const showForm = ref(false)
-const editingTicket = ref(null)
-const isDeleting = ref(false)
-const deleteConfirm = ref({ isOpen: false, ticketId: '' })
-const currentUser = ref({})
-
+const router = useRouter()
 const { addToast } = useToast()
-const { handleError, handleSessionExpired } = useErrorHandler()
+const { handleError } = useErrorHandler()
 
-onMounted(() => {
-  const user = localStorage.getItem('currentUser')
-  if (!user) {
-    handleSessionExpired()
-    return
+const email = ref('')
+const password = ref('')
+const confirmPassword = ref('')
+const isLoading = ref(false)
+const errors = ref({ email: '', password: '', confirmPassword: '' })
+
+const validateForm = () => {
+  errors.value = { email: '', password: '', confirmPassword: '' }
+  let isValid = true
+
+  if (!email.value) {
+    errors.value.email = ERROR_MESSAGES.FORM_EMPTY_EMAIL
+    isValid = false
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+    errors.value.email = ERROR_MESSAGES.FORM_INVALID_EMAIL
+    isValid = false
   }
-  currentUser.value = JSON.parse(user)
 
-  const allTickets = JSON.parse(localStorage.getItem('tickets') || '[]')
-  tickets.value = allTickets.filter((t) => t.userId === currentUser.value.id)
-})
-
-const filteredTickets = computed(() =>
-  tickets.value.filter(
-    t =>
-      t.title.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
-      t.description.toLowerCase().includes(searchTerm.value.toLowerCase())
-  )
-)
-
-const getStatusColor = (status) => {
-  switch (status) {
-    case 'open':
-      return 'bg-green-900 text-green-200'
-    case 'in-progress':
-      return 'bg-amber-900 text-amber-200'
-    case 'closed':
-      return 'bg-slate-700 text-slate-200'
-    default:
-      return 'bg-slate-700 text-slate-200'
+  if (!password.value) {
+    errors.value.password = ERROR_MESSAGES.FORM_EMPTY_PASSWORD
+    isValid = false
+  } else if (password.value.length < 6) {
+    errors.value.password = ERROR_MESSAGES.FORM_PASSWORD_TOO_SHORT
+    isValid = false
   }
-}
 
-const toggleForm = () => {
-  showForm.value = !showForm.value
-  if (!showForm.value) {
-    editingTicket.value = null
+  if (!confirmPassword.value) {
+    errors.value.confirmPassword = 'Please confirm your password'
+    isValid = false
+  } else if (password.value !== confirmPassword.value) {
+    errors.value.confirmPassword = ERROR_MESSAGES.FORM_PASSWORDS_DONT_MATCH
+    isValid = false
   }
+
+  return isValid
 }
 
-const cancelForm = () => {
-  showForm.value = false
-  editingTicket.value = null
-}
+const handleSignup = async () => {
+  if (!validateForm()) return
 
-const startEdit = (ticket) => {
-  editingTicket.value = ticket
-  showForm.value = true
-}
+  isLoading.value = true
 
-const handleAddTicket = (ticketData) => {
   try {
-    const newTicket = {
-      ...ticketData,
+    const users = JSON.parse(localStorage.getItem('users') || '[]')
+
+    if (users.some((u) => u.email === email.value)) {
+      throw new Error(ERROR_MESSAGES.AUTH_USER_EXISTS)
+    }
+
+    const newUser = {
       id: Date.now().toString(),
-      createdAt: new Date().toISOString(),
-      userId: currentUser.value.id
+      email: email.value,
+      password: password.value, // In a real app, you should hash this
     }
 
-    const allTickets = JSON.parse(localStorage.getItem('tickets') || '[]')
-    allTickets.push(newTicket)
-    localStorage.setItem('tickets', JSON.stringify(allTickets))
+    users.push(newUser)
+    localStorage.setItem('users', JSON.stringify(users))
 
-    tickets.value.push(newTicket)
-    cancelForm()
-    addToast('Ticket created successfully', 'success')
-  } catch (error) {
-    handleError(error, { showToast: true })
-  }
-}
+    // Automatically log the user in
+    const token = Date.now().toString() // Simple token generation
+    localStorage.setItem('authToken', token)
+    localStorage.setItem(
+      'currentUser',
+      JSON.stringify({ id: newUser.id, email: newUser.email })
+    )
 
-const handleUpdateTicket = (ticketData) => {
-  try {
-    if (!editingTicket.value) return
-
-    const updatedTicket = {
-      ...editingTicket.value,
-      ...ticketData
-    }
-
-    const allTickets = JSON.parse(localStorage.getItem('tickets') || '[]')
-    const index = allTickets.findIndex((t) => t.id === editingTicket.value.id)
-
-    if (index === -1) throw new Error('Ticket not found')
-
-    allTickets[index] = updatedTicket
-    localStorage.setItem('tickets', JSON.stringify(allTickets))
-
-    const ticketIndex = tickets.value.findIndex(t => t.id === editingTicket.value.id)
-    if (ticketIndex !== -1) {
-      tickets.value[ticketIndex] = updatedTicket
-    }
-
-    cancelForm()
-    addToast('Ticket updated successfully', 'success')
-  } catch (error) {
-    handleError(error, { showToast: true })
-  }
-}
-
-const openDeleteConfirm = (ticketId) => {
-  deleteConfirm.value = { isOpen: true, ticketId }
-}
-
-const closeDeleteConfirm = () => {
-  deleteConfirm.value = { isOpen: false, ticketId: '' }
-}
-
-const handleConfirmDelete = async () => {
-  if (!deleteConfirm.value.ticketId) return
-
-  isDeleting.value = true
-
-  try {
-    await new Promise(resolve => setTimeout(resolve, 500))
-
-    const allTickets = JSON.parse(localStorage.getItem('tickets') || '[]')
-    const filtered = allTickets.filter((t) => t.id !== deleteConfirm.value.ticketId)
-    localStorage.setItem('tickets', JSON.stringify(filtered))
-
-    tickets.value = tickets.value.filter(t => t.id !== deleteConfirm.value.ticketId)
-    closeDeleteConfirm()
-    addToast('Ticket deleted successfully', 'success')
+    addToast('Account created successfully', 'success')
+    router.push('/dashboard')
   } catch (error) {
     handleError(error, { showToast: true })
   } finally {
-    isDeleting.value = false
+    isLoading.value = false
   }
 }
 </script>

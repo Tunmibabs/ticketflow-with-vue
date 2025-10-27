@@ -2,10 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @theme inline {
+@theme inline {
   --font-sans: "Geist", "Geist Fallback";
   --font-mono: "Geist Mono", "Geist Mono Fallback";
-} */
+}
 
 :root {
   --background: #0f172a;
@@ -24,10 +24,6 @@
   --status-open: #10b981;
   --status-in-progress: #f59e0b;
   --status-closed: #6b7280;
-}
-
-* {
-  @apply border-[var(--border)] ring-1 ring-[var(--primary)] ring-opacity-50;
 }
 
 body {

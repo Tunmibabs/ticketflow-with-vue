@@ -1,23 +1,23 @@
 <template>
   <div
-    class="min-h-screen bg-[var(--background)] text-[var(--foreground)] overflow-hidden flex flex-col"
+    class="min-h-screen bg-[var(--background)] text-[var(--foreground)] overflow-hidden"
   >
     <div class="flex-1">
       <!-- Navigation -->
       <nav
         class="relative z-10 flex items-center justify-between px-6 py-4 max-w-7xl mx-auto"
       >
-        <div class="text-2xl font-bold text-[var(--primary)]">TicketFlow</div>
+        <div class="text-4xl font-bold text-[var(--primary)]">TicketFlow</div>
         <div class="flex gap-4">
           <router-link
             to="/login"
-            class="px-6 py-2 rounded-lg text-[var(--foreground)] hover:bg-[var(--card)] transition-colors"
+            class="px-4 py-2 rounded-lg text-[var(--foreground)] hover:bg-[var(--card)] transition-colors"
           >
             Login
           </router-link>
           <router-link
             to="/signup"
-            class="px-6 py-2 rounded-lg bg-[var(--primary)] text-[var(--primary-foreground)] hover:opacity-90 transition-opacity"
+            class="px-4 py-2 rounded-lg bg-[var(--primary)] text-[var(--primary-foreground)] hover:opacity-90 transition-opacity"
           >
             Sign Up
           </router-link>
@@ -25,7 +25,7 @@
       </nav>
 
       <!-- Hero Section -->
-      <div class="relative z-10 max-w-7xl mx-auto px-6 py-20 text-center">
+      <div class="relative max-w-7xl mx-auto px-6 py-20 text-center">
         <div
           class="absolute -top-40 -right-40 w-80 h-80 bg-[var(--primary)] rounded-full opacity-5 blur-3xl"
         ></div>
@@ -62,7 +62,7 @@
         <!-- Feature Cards -->
         <div class="grid md:grid-cols-3 gap-6 mt-20">
           <div
-            class="p-6 rounded-lg bg-[var(--card)] border border-[var(--border)] hover:border-[var(--primary)] transition-colors"
+            class="p-6 rounded-lg bg-[var(--card)] border border-[var(--border)] transition-colors"
           >
             <div class="text-3xl mb-4">📋</div>
             <h3 class="text-lg font-semibold mb-2">Easy Management</h3>
@@ -72,7 +72,7 @@
           </div>
 
           <div
-            class="p-6 rounded-lg bg-[var(--card)] border border-[var(--border)] hover:border-[var(--accent)] transition-colors"
+            class="p-6 rounded-lg bg-[var(--card)] border border-[var(--border)] transition-colors"
           >
             <div class="text-3xl mb-4">⚡</div>
             <h3 class="text-lg font-semibold mb-2">Real-time Updates</h3>
@@ -82,7 +82,7 @@
           </div>
 
           <div
-            class="p-6 rounded-lg bg-[var(--card)] border border-[var(--border)] hover:border-[var(--primary)] transition-colors"
+            class="p-6 rounded-lg bg-[var(--card)] border border-[var(--border)] transition-colors"
           >
             <div class="text-3xl mb-4">🔒</div>
             <h3 class="text-lg font-semibold mb-2">Secure & Private</h3>

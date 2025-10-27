@@ -24,35 +24,15 @@
                 class="w-full px-4 py-2 bg-slate-800 text-slate-100 rounded-lg border border-slate-700 opacity-50 cursor-not-allowed"
               />
             </div>
-
-            <div>
-              <label
-                class="block text-sm font-medium text-[var(--foreground)] mb-2"
-                >Account Created</label
-              >
-              <input
-                :value="accountCreated"
-                type="text"
-                disabled
-                class="w-full px-4 py-2 bg-slate-800 text-slate-100 rounded-lg border border-slate-700 opacity-50 cursor-not-allowed"
-              />
-            </div>
-
-            <div class="border-t border-slate-700 pt-6">
-              <h3 class="text-lg font-semibold text-slate-100 mb-4">
-                Preferences
-              </h3>
-              <div class="space-y-4">
-                <label class="flex items-center gap-3 cursor-pointer">
-                  <input type="checkbox" checked class="w-4 h-4 rounded" />
-                  <span class="text-slate-300">Email notifications</span>
-                </label>
-                <label class="flex items-center gap-3 cursor-pointer">
-                  <input type="checkbox" checked class="w-4 h-4 rounded" />
-                  <span class="text-slate-300">Weekly digest</span>
-                </label>
-              </div>
-            </div>
+          </div>
+          <div>
+            <label className="block text-sm text-slate-300 mb-2">Theme</label>
+            <select
+              className="w-full px-4 py-2 bg-slate-800 text-slate-100 rounded-lg border border-slate-700"
+            >
+              <option>Dark</option>
+              <option>Light</option>
+            </select>
           </div>
         </div>
       </div>

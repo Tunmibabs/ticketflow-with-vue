@@ -4,14 +4,34 @@
       <h1 class="text-3xl font-bold text-slate-100 mb-8">Analytics</h1>
 
       <div class="grid md:grid-cols-2 gap-6">
-        <div
+        <div className="bg-slate-900 rounded-lg p-6 border border-slate-700">
+          <h2 className="text-lg font-semibold text-slate-100 mb-4">
+            Ticket Trends
+          </h2>
+          <div
+            className="h-64 bg-slate-800 rounded flex items-center justify-center text-slate-400"
+          >
+            Chart placeholder
+          </div>
+        </div>
+        <!-- <div
           class="p-6 rounded-lg bg-[var(--card)] border border-[var(--border)]"
         >
           <h2 class="text-xl font-bold text-slate-100 mb-4">Ticket Trends</h2>
           <TicketChart :data="trendData" />
+        </div> -->
+        <div className="bg-slate-900 rounded-lg p-6 border border-slate-700">
+          <h2 className="text-lg font-semibold text-slate-100 mb-4">
+            Resolution Time
+          </h2>
+          <div
+            className="h-64 bg-slate-800 rounded flex items-center justify-center text-slate-400"
+          >
+            Chart placeholder
+          </div>
         </div>
 
-        <div
+        <!-- <div
           class="p-6 rounded-lg bg-[var(--card)] border border-[var(--border)]"
         >
           <h2 class="text-xl font-bold text-slate-100 mb-4">
@@ -37,7 +57,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </DashboardLayout>

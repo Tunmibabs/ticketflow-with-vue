@@ -3,11 +3,11 @@ import { inject, ref } from "vue";
 const ToastSymbol = Symbol("Toast");
 
 export function useToast() {
-  const context = ToastSymbol;
+  const context = inject(ToastSymbol); 
   if (!context) {
-    throw new Error("useToast must be used within ToastProvider");
+    throw new Error("useToast() must be used within the scope of the Toast provider (App.vue)");
   }
-  return context;
+  return context; 
 }
 
 export function createToastContext() {
@@ -15,7 +15,9 @@ export function createToastContext() {
 
   const addToast = (message, type = "info") => {
     const id = Date.now().toString();
-    toasts.value.push({ id, message, type });
+    const validTypes = ['success', 'error', 'info'];
+    const toastType = validTypes.includes(type) ? type : 'info';
+    toasts.value.push({ id, message, type: toastType });
 
     setTimeout(() => {
       removeToast(id);
@@ -26,7 +28,8 @@ export function createToastContext() {
     toasts.value = toasts.value.filter((t) => t.id !== id);
   };
 
-  return { toasts, addToast, removeToast };
+  return { toasts, addToast, removeToast }; 
 }
 
 export { ToastSymbol };
+

@@ -7,14 +7,17 @@
           @click="toggleForm"
           class="px-6 py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors"
         >
-          {{ showForm ? 'Cancel' : '+ New Ticket' }}
+          {{ showForm ? "Cancel" : "+ New Ticket" }}
         </button>
       </div>
 
       <div v-if="showForm" class="mb-8">
         <TicketForm
           :initial-data="editingTicket"
-          @submit="editingTicket ? handleUpdateTicket : handleAddTicket"
+          @submit="
+            (data) =>
+              editingTicket ? handleUpdateTicket(data) : handleAddTicket(data)
+          "
           @cancel="cancelForm"
         />
       </div>
@@ -32,18 +35,45 @@
         <table class="w-full">
           <thead>
             <tr class="border-b border-slate-700 bg-slate-800">
-              <th class="px-6 py-3 text-left text-sm font-semibold text-slate-300">Title</th>
-              <th class="px-6 py-3 text-left text-sm font-semibold text-slate-300">Description</th>
-              <th class="px-6 py-3 text-left text-sm font-semibold text-slate-300">Status</th>
-              <th class="px-6 py-3 text-left text-sm font-semibold text-slate-300">Actions</th>
+              <th
+                class="px-6 py-3 text-left text-sm font-semibold text-slate-300"
+              >
+                Title
+              </th>
+              <th
+                class="px-6 py-3 text-left text-sm font-semibold text-slate-300"
+              >
+                Description
+              </th>
+              <th
+                class="px-6 py-3 text-left text-sm font-semibold text-slate-300"
+              >
+                Status
+              </th>
+              <th
+                class="px-6 py-3 text-left text-sm font-semibold text-slate-300"
+              >
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="ticket in filteredTickets" :key="ticket.id" class="border-b border-slate-700 hover:bg-slate-800">
+            <tr
+              v-for="ticket in filteredTickets"
+              :key="ticket.id"
+              class="border-b border-slate-700 hover:bg-slate-800"
+            >
               <td class="px-6 py-4 text-slate-100">{{ ticket.title }}</td>
-              <td class="px-6 py-4 text-slate-300 truncate">{{ ticket.description }}</td>
+              <td class="px-6 py-4 text-slate-300 truncate">
+                {{ ticket.description }}
+              </td>
               <td class="px-6 py-4">
-                <span :class="['px-3 py-1 rounded-full text-xs font-medium', getStatusColor(ticket.status)]">
+                <span
+                  :class="[
+                    'px-3 py-1 rounded-full text-xs font-medium',
+                    getStatusColor(ticket.status),
+                  ]"
+                >
                   {{ ticket.status }}
                 </span>
               </td>
@@ -150,6 +180,7 @@ const startEdit = (ticket) => {
 }
 
 const handleAddTicket = (ticketData) => {
+  console.log("Ticket data received:", ticketData)
   try {
     const newTicket = {
       ...ticketData,

@@ -4,16 +4,16 @@
       <h1 class="text-3xl font-bold text-slate-100 mb-8">Dashboard</h1>
 
       <div class="grid md:grid-cols-4 gap-6">
-        <StatCard title="Total Tickets" :value="stats.total" icon="📊" />
-        <StatCard title="Open" :value="stats.open" icon="🟢" />
-        <StatCard title="In Progress" :value="stats.inProgress" icon="🟡" />
-        <StatCard title="Closed" :value="stats.closed" icon="⚫" />
+        <StatCard title="Total Tickets" :value="stats.total"/>
+        <StatCard title="Open" :value="stats.open"/>
+        <StatCard title="In Progress" :value="stats.inProgress"/>
+        <StatCard title="Closed" :value="stats.closed"/>
       </div>
 
-      <div class="mt-12">
+      <!-- <div class="mt-12">
         <h2 class="text-2xl font-bold text-slate-100 mb-6">Ticket Activity</h2>
         <TicketChart :data="chartData" />
-      </div>
+      </div> -->
     </div>
   </DashboardLayout>
 </template>
